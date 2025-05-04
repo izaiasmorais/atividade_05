@@ -18,10 +18,10 @@ public class Menu {
 	}
 
 	public int getSelection() {
-		int op = 0;
-		while (op==0){
-			System.out.println(title+"\n");
-			int i=1;
+		int op = -1;
+		while (op == -1) {
+			System.out.println(title + "\n");
+			int i = 0;
 			for (String option : options) {
 				System.out.println(i++ + " - " + option);
 			}
@@ -31,13 +31,12 @@ public class Menu {
 			String str = s.nextLine();
 			try {
 				op = Integer.parseInt(str);
+			} catch (NumberFormatException e) {
+				op = -1;
 			}
-			catch (NumberFormatException e) {
-				op =0;
-			}
-			if (op>=i){
+			if (op < 0 || op >= options.size()) {
 				System.out.println("Opcao errada!");
-				op=0;
+				op = -1;
 			}
 
 		}
