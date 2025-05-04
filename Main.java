@@ -29,6 +29,20 @@ public class Main {
 				catch (Exception e) {
 					System.out.println("Erro ao criar cliente: " + e.getMessage());
 				}
+			} else if (selecao == 2) { 
+				try{
+					Scanner sc = new Scanner(System.in);
+					System.out.println("Número da conta:");
+					String numero = sc.nextLine();
+					System.out.println("CPF do titular:");
+					String cpf = sc.nextLine();
+				
+					Conta conta = new Conta(numero, cpf);
+					FileUtils.salvarEmArquivo("contas.txt", conta.toString());
+				}
+				catch (Exception e) {
+					System.out.println("Erro ao criar conta: " + e.getMessage());
+				}
 			} 
 			else if (selecao == 3) { 
 				System.out.println("Realizando operações...");
