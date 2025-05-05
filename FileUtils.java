@@ -10,4 +10,38 @@ public class FileUtils {
             System.out.println("Erro ao salvar no arquivo: " + e.getMessage());
         }
     }
+
+    public static boolean excluirClientePorCpf(String caminho, String cpf) throws IOException {
+		File inputFile = new File(caminho);
+		File tempFile = new File("temp.txt");
+
+		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+		String currentLine;
+		boolean encontrado = false;
+
+		while ((currentLine = reader.readLine()) != null) {
+			if (currentLine.contains(cpf)) {
+				encontrado = true;
+				continue;
+			}
+			writer.write(currentLine + System.getProperty("line.separator"));
+		}
+
+		writer.close();
+		reader.close();
+
+		if (!inputFile.delete()) {
+			System.out.println("Não foi possível deletar o arquivo original");
+			return false;
+		}
+
+		if (!tempFile.renameTo(inputFile)) {
+			System.out.println("Não foi possível renomear o arquivo temporário");
+			return false;
+		}
+
+		return encontrado;
+	}
 }
