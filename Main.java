@@ -6,7 +6,7 @@ public class Main {
 		boolean executando = true;
 
 		while (executando) {
-			Menu mainMenu = new Menu("Menu Principal", Arrays.asList("Sair", "Cliente", "Conta", "Operacoes"));
+			Menu mainMenu = new Menu("Menu Principal", Arrays.asList("Sair", "Criar Cliente", "Excluir Cliente", "Conta", "Operacoes"));
 			int selecao = mainMenu.getSelection();
 
 			if (selecao == 0) {
