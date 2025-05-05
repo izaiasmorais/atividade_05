@@ -1,7 +1,28 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileUtils {
+
+	public static boolean verificarCpfExistente(String caminho, String cpf) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(caminho))) {
+			String currentLine;
+			while ((currentLine = reader.readLine()) != null) {
+				String[] dados = currentLine.split(";");
+				if (dados.length > 1 && dados[1].equals(cpf)) {
+					return true; // CPF já existe
+				}
+			}
+			return false; // CPF não encontrado
+		} catch (IOException e) {
+			System.out.println("Erro ao verificar CPF: " + e.getMessage());
+			return false;
+		}
+	}
+	
     public static void salvarEmArquivo(String nomeArquivo, String conteudo) {
         try (FileWriter writer = new FileWriter(nomeArquivo, true)) {
             writer.write(conteudo + "\n");
