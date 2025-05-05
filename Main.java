@@ -32,23 +32,21 @@ public class Main {
 				catch (Exception e) {
 					System.out.println("Erro ao criar cliente: " + e.getMessage());
 				}
-			}
-			else if(selecao == 2) {
-				try {
+			} else if (selecao == 2) { 
+				try{
 					Scanner sc = new Scanner(System.in);
-					System.out.println("Informe o CPF do cliente a ser excluído:");
-					String cpfParaExcluir = sc.nextLine();
-
-					boolean excluido = FileUtils.excluirClientePorCpf("clientes.txt", cpfParaExcluir);
-					if (excluido) {
-						System.out.println("Cliente excluído com sucesso!");
-					} else {
-						System.out.println("Cliente com CPF informado não encontrado.");
-					}
-				} catch (Exception e) {
-					System.out.println("Erro ao excluir cliente: " + e.getMessage());
+					System.out.println("Número da conta:");
+					String numero = sc.nextLine();
+					System.out.println("CPF do titular:");
+					String cpf = sc.nextLine();
+				
+					Conta conta = new Conta(numero, cpf);
+					FileUtils.salvarEmArquivo("contas.txt", conta.toString());
 				}
-			}
+				catch (Exception e) {
+					System.out.println("Erro ao criar conta: " + e.getMessage());
+				}
+			} 
 			else if (selecao == 3) { 
 				try {
 					Scanner sc = new Scanner(System.in);
@@ -69,8 +67,19 @@ public class Main {
 				}
 			}
 			else if (selecao == 4) { 
-				System.out.println("Realizando operações...");
-				// Implementar operações aqui
+				try{
+					Scanner sc = new Scanner(System.in);
+					System.out.println("Número da conta:");
+					String numero = sc.nextLine();
+					System.out.println("CPF do titular:");
+					String cpf = sc.nextLine();
+				
+					Conta conta = new Conta(numero, cpf);
+					FileUtils.salvarEmArquivo("contas.txt", conta.toString());
+				}
+				catch (Exception e) {
+					System.out.println("Erro ao criar conta: " + e.getMessage());
+				}
 			}
 			else {
 				System.out.println("Opção " + selecao + " - " +
