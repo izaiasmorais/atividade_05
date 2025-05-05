@@ -6,7 +6,7 @@ public class Main {
 		boolean executando = true;
 
 		while (executando) {
-			Menu mainMenu = new Menu("Menu Principal", Arrays.asList("Sair", "Criar Cliente", "Excluir Cliente", "Conta", "Operacoes"));
+			Menu mainMenu = new Menu("Menu Principal", Arrays.asList("Sair", "Criar Cliente", "Excluir Cliente", "Editar Cliente", "Conta", "Operacoes"));
 			int selecao = mainMenu.getSelection();
 
 			if (selecao == 0) {
@@ -45,6 +45,25 @@ public class Main {
 				}
 			} 
 			else if (selecao == 3) { 
+				try {
+					Scanner sc = new Scanner(System.in);
+					System.out.println("Informe o CPF do cliente a ser editado:");
+					String cpfParaEditar = sc.nextLine();
+
+					System.out.println("Novo nome para o cliente:");
+					String novoNome = sc.nextLine();
+
+					boolean editado = FileUtils.editarClientePorCpf("clientes.txt", cpfParaEditar, novoNome);
+					if (editado) {
+						System.out.println("Cliente editado com sucesso!");
+					} else {
+						System.out.println("Cliente com CPF informado não encontrado.");
+					}
+				} catch (Exception e) {
+					System.out.println("Erro ao editar cliente: " + e.getMessage());
+				}
+			}
+			else if (selecao == 4) { 
 				System.out.println("Realizando operações...");
 				// Implementar operações aqui
 			}
