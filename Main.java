@@ -22,9 +22,12 @@ public class Main {
 					System.out.println("CPF do cliente:");
 					String cpf = sc.nextLine();
 
-					Cliente cliente = new Cliente(nome, cpf);
-					FileUtils.salvarEmArquivo("clientes.txt", cliente.toString());
-					
+					if (FileUtils.verificarCpfExistente("clientes.txt", cpf)) {
+						System.out.println("Erro: Já existe um cliente cadastrado com este CPF!");
+					} else {
+						Cliente cliente = new Cliente(nome, cpf);
+						FileUtils.salvarEmArquivo("clientes.txt", cliente.toString());
+					}
 				}
 				catch (Exception e) {
 					System.out.println("Erro ao criar cliente: " + e.getMessage());
