@@ -64,8 +64,19 @@ public class Main {
 				}
 			}
 			else if (selecao == 4) { 
-				System.out.println("Realizando operações...");
-				// Implementar operações aqui
+				try{
+					Scanner sc = new Scanner(System.in);
+					System.out.println("Número da conta:");
+					String numero = sc.nextLine();
+					System.out.println("CPF do titular:");
+					String cpf = sc.nextLine();
+				
+					Conta conta = new Conta(numero, cpf);
+					FileUtils.salvarEmArquivo("contas.txt", conta.toString());
+				}
+				catch (Exception e) {
+					System.out.println("Erro ao criar conta: " + e.getMessage());
+				}
 			}
 			else {
 				System.out.println("Opção " + selecao + " - " +
