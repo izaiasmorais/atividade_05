@@ -94,5 +94,19 @@ public class FileUtils {
 
 		return encontrado;
 	}
-
+	public static String buscarClientePorCpf(String caminho, String cpf) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(caminho))) {
+			String currentLine;
+			while ((currentLine = reader.readLine()) != null) {
+				String[] dados = currentLine.split(";");
+				if (dados.length > 1 && dados[1].equals(cpf)) {
+					return "Nome: " + dados[0] + ", CPF: " + dados[1];
+				}
+			}
+			return null; // Cliente não encontrado
+		} catch (IOException e) {
+			System.out.println("Erro ao buscar cliente: " + e.getMessage());
+			return null;
+		}
+	}
 }
